@@ -1,0 +1,58 @@
+# Define 1 kg box with an AprilTag on the front of the box
+[world.package.body]
+type = "box"
+size = [0.4, 0.4, 0.4]
+mass = 1.0
+april-tags = [{id = 0, pose = {xy = [0.2, 0.0]}}]
+
+# Define a table with two AprilTags on the front of the table
+[world.table.body]
+type = "box"
+size = [0.4, 1.0, 0.05]
+april-tags = [{id = 1, pose = {xy = [0.2, -0.5]}},
+           {id = 2, pose = {xy = [0.2, 0.5]}}]
+           
+# Define a table with two AprilTags on the front of the table
+[world.wall.body]
+type = "box"
+size = [0.4, 1.0, 1.6]
+
+# Add robot to world
+[[model-list]]
+model = "robot"
+pose = {xyz = [0, 0, 1]}
+
+# Add table in front of the robot and rotate so the AprilTags are facing the robot.
+[[model-list]]
+model = "table"
+pose = {rpyxyzd = [0, 0, 0, 5.5, 0, 0.7]}
+fixed = true
+
+# Add another table behind the robot. Set the AprilTag ID offset so the AprilTag IDs don't conflict.
+[[model-list]]
+model = "table"
+pose = {xyz = [-1.5, 0, 0.7]}
+april-tag-id-offset = 10
+fixed = true
+
+# Add table in front of the robot and rotate so the AprilTags are facing the robot.
+[[model-list]]
+model = "wall"
+pose = {rpyxyzd = [0, 0, 0, 3.5, 0, 0.8]}
+fixed = true
+
+# Add table in front of the robot and rotate so the AprilTags are facing the robot.
+[[model-list]]
+model = "wall"
+pose = {rpyxyzd = [0, 0, 90, 4, 1.0, 0.8]}
+fixed = true
+
+[[model-list]]
+model = "wall"
+pose = {rpyxyzd = [0, 0, 90, 2, -1.0, 0.8]}
+fixed = true
+
+# Add box on top of table in front of the robot.
+[[model-list]]
+model = "package"
+pose = {rpyxyzd = [0, 0, 0, 5.5, 0, 0.925]}
